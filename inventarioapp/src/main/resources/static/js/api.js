@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:8081/api"; // ajusta si usas otro puerto
+const API_BASE = "http://localhost:8081/api"; // PUERTO EN USO
 
 export async function obtenerProductos() {
     const res = await fetch(`${API_BASE}/productos`);

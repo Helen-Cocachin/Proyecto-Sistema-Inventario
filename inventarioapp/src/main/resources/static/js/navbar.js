@@ -3,6 +3,6 @@ fetch('/navbar.html')
     .then(html => {
         document.getElementById('navbar-container').innerHTML = html;
 
-        // Simulación de nombre de usuario
+        // Simulación de nombre de usuario AUN INCOMPLETO
         document.getElementById("nombre-usuario").innerText = localStorage.getItem("usuarioNombre") || "Gadiel Zúñiga";
     });

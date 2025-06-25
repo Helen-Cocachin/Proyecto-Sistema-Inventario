@@ -25,26 +25,24 @@ public class ProductoController {
     @Autowired
     private ProductoService productoService;
 
-    // Obtener todos los productos
+    // OBTINENE TODOS LOS PRODUCTO
     @GetMapping
     public List<Producto> listar() {
         return productoService.listarTodos();
     }
 
-    // Guardar nuevo producto
+    // GUARDA
     @PostMapping
     public Producto guardar(@RequestBody Producto producto) {
         return productoService.guardar(producto);
     }
 @PutMapping("/{id}")
 public ResponseEntity<Producto> actualizar(@PathVariable Long id, @RequestBody Producto producto) {
-    producto.setId(id); // asigna el ID al objeto recibido
+    producto.setId(id);
     Producto actualizado = productoService.guardar(producto);
     return ResponseEntity.ok(actualizado);
 }
 
-
-    // Eliminar producto por ID
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable Long id) {
         productoService.eliminar(id);

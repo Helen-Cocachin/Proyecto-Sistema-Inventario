@@ -16,8 +16,6 @@ public class SeccionDTO {
         this.estado = estado;
         this.ultimaActualizacion = ultimaActualizacion;
     }
-
-    // Getters y setters
     public String getTitulo() { return titulo; }
     public void setTitulo(String titulo) { this.titulo = titulo; }
 

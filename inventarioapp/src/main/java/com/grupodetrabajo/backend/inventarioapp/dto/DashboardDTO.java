@@ -4,8 +4,6 @@ public class DashboardDTO {
     private long totalProductos;
     private int totalStock;
     private double valorTotalInventario;
-
-    // Getters y Setters
     public long getTotalProductos() {
         return totalProductos;
     }

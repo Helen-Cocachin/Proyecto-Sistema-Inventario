@@ -30,8 +30,6 @@ public class Producto {
     @JoinColumn(name = "proveedor_id")
     private Proveedor proveedor;
 
-    // Getters y Setters
-
     public Long getId() {
         return id;
     }

@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Mostrar fecha y hora actual en la vista
+    // FECHA HORA
     const ahora = new Date();
     const fechaFormateada = ahora.toLocaleString("es-PE", {
         year: "numeric",
@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     document.getElementById("fecha-reporte").textContent = fechaFormateada;
 
-    // Cargar productos
     fetch("/api/productos")
         .then(res => res.json())
         .then(data => {
@@ -37,7 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 });
 
-// ✅ Esta función ahora está fuera del DOMContentLoaded y será accesible desde el HTML
 function descargarPDF() {
     import("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js").then(jsPDF => {
         const { jsPDF: PDF } = jsPDF;
