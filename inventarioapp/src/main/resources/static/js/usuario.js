@@ -1,32 +1,49 @@
-// ========================
-// INICIO DEL CÓDIGO DE LOGIN
-// ========================
-document.getElementById("login-form").addEventListener("submit", function(event) {
-    event.preventDefault(); // Previene el envío del formulario
+document.addEventListener("DOMContentLoaded", () => {
+  cargarUsuarios();
 
-    const usuarioInput = document.getElementById("usuario").value;
-    const claveInput = document.getElementById("clave").value;
+  document.getElementById("formUsuario").addEventListener("submit", function (e) {
+    e.preventDefault();
 
-    // Usuarios simulados (en vez de base de datos por ahora)
-    const usuarios = [
-        { id: 1, clave: "1234", nombre: "Ana Torres", usuario: "atorres" },
-        { id: 2, clave: "abcd", nombre: "Carlos Pérez", usuario: "cperez" }
-    ];
+    const usuario = {
+      nombre: document.getElementById("nombre").value,
+      correo: document.getElementById("correo").value,
+      contrasena: document.getElementById("contrasena").value,
+      rol: document.getElementById("rol").value
+    };
 
-    const usuarioEncontrado = usuarios.find(user =>
-        user.usuario === usuarioInput && user.clave === claveInput
-    );
-
-    if (usuarioEncontrado) {
-        document.getElementById("login-error").textContent = "";
-        alert("Bienvenido, " + usuarioEncontrado.nombre);
-        // Aquí se oculta la sección de login 
-     document.getElementById("login-section").style.display = "none";
-    } else {
-        document.getElementById("login-error").textContent = "Usuario o clave incorrectos.";
-    }
+    fetch("http://localhost:8080/api/usuarios", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(usuario)
+    })
+      .then(res => {
+        if (!res.ok) throw new Error("Error al agregar usuario");
+        return res.json();
+      })
+      .then(() => {
+        this.reset();
+        cargarUsuarios();
+      })
+      .catch(error => alert("Error: " + error.message));
+  });
 });
-// ========================
-// FIN DEL CÓDIGO DE LOGIN
-// ========================
+
+function cargarUsuarios() {
+  fetch("http://localhost:8080/api/usuarios")
+    .then(res => res.json())
+    .then(data => {
+      const tabla = document.getElementById("tablaUsuarios");
+      tabla.innerHTML = "";
+      data.forEach(usuario => {
+        const row = `
+          <tr>
+            <td>${usuario.nombre}</td>
+            <td>${usuario.correo}</td>
+            <td>${usuario.rol}</td>
+          </tr>`;
+        tabla.innerHTML += row;
+      });
+    })
+    .catch(error => console.error("Error al cargar usuarios:", error));
+}
 
